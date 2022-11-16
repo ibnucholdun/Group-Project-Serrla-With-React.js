@@ -94,7 +94,7 @@ const Home = () => {
                     modul.map((item) => {
                       return (
                         <SwiperSlide key={item.id}>
-                          <CardModul title={item.title} image={item.image} descript={item.descript} category={item.category} id={item.id}/>
+                          <CardModul title={item.title} image={item.image} descript={item.descript} category={item.category} id={item.id} style={{width: "18rem"}}/>
                         </SwiperSlide>
                       )
                     })

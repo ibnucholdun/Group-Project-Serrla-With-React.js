@@ -13,10 +13,9 @@ const userReducer = (state = initialState, action) => {
             }
 
         case SIGN_IN:
-            const user = state.user.find((user) => user.email === action.user.email && user.password === action.user.password);
             return {
                 ...state,
-                user: user,
+                user: action.user,
             }
 
         default:

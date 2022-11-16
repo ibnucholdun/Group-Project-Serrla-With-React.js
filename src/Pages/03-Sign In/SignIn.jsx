@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Gambar1 from '../../Assets/images/gambar4.png'
 import { Link, useNavigate } from 'react-router-dom'
 import InputText from '../../Components/InputText/InputText'
@@ -14,9 +14,29 @@ const SignIn = () => {
   const {user} = useSelector(state => state.user)
   const dispacth = useDispatch()
 
+  useEffect(() => {
+    dispacth(signIn(email, password))
+  }, [])
+
   const handleSubmit = (e) => {
     e.preventDefault()
-  
+    const findUser = user.find(item => item.email === email && item.password === password)
+    if(findUser) {
+      localStorage.setItem('user', JSON.stringify(findUser))
+      Swal.fire({
+        icon: 'success',
+        title: 'Login Success',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      navigate('/home')
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Email atau Password Salah!',
+      })
+    }
   }
   return (
     <>

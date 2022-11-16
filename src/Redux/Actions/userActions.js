@@ -24,9 +24,9 @@ export const signUp = (user) => {
     }
 }
 
-export const signIn = () => {
+export const signIn = (user) => {
     return async (dispatch) => {
-        const response = await axios.get('https://634e1a17b8ce95a1dd7e9aa0.mockapi.io/users');
+        const response = await axios.get('https://634e1a17b8ce95a1dd7e9aa0.mockapi.io/users', user);
         dispatch(postSignInSuccess(response.data));
     }
 }

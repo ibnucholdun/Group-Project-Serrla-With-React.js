@@ -1,11 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../../Components/Navbar/Navbar'
 import Gambar1 from '../../Assets/images/gambar5.png'
 import Gambar2 from '../../Assets/images/gambar6.jpg'
 import Gambar3 from '../../Assets/images/gambar7.jpg'
+import Vector1 from '../../Assets/images/vector3.png'
+import Vector2 from '../../Assets/images/vector4.png'
+import { Link } from 'react-router-dom'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { useDispatch, useSelector } from 'react-redux'
+import { getModul } from '../../Redux/Actions/modulActions'
+import CardModul from '../../Components/Card Modul/CardModul'
+import 'swiper/css/navigation';
+import 'swiper/css';
 import './Home.css'
 
 const Home = () => {
+  SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
+  const dispatch = useDispatch()
+  const {modul, isLoading} = useSelector(state => state.modul)
+
+  useEffect(() => {
+    dispatch(getModul())
+  }, [])
+
   return (
     <div>
       <Navbar nav1={'Home'} route1={'/home'} nav2={'Modul'} route2={'/modul'} nav4={'Logout'} route4={'/'}/>
@@ -31,6 +49,54 @@ const Home = () => {
               <span className="carousel-control-next-icon" aria-hidden="true"></span>
               <span className="visually-hidden">Next</span>
             </button>
+          </div>
+        </section>
+
+        <section className="list-class-section mx-4">
+          <div className="container">
+            <img src={Vector1} alt="" className="vector1"/>
+            <img src={Vector2} alt="" className="vector7"/>
+            <div className="row">
+              <div className="col-md-12 d-flex justify-content-between align-items-center">
+                  <h2 className="list-class-text pw-semibold h2">Modul Tersedia</h2>
+                  <Link to="/modul" className="list-class-text pw-semibold" style={{color: "#005386"}}>Selengkapnya</Link>
+              </div>
+            </div>
+            <div className="row mx-auto">
+              <div className="swiper">
+                <Swiper
+                  breakpoints={{
+                      320: {
+                        slidesPerView: 1,
+                      },
+                      480: {
+                        slidesPerView: 2,
+                        spaceBetween: 30
+                      },
+                      769: {
+                        slidesPerView: 3,
+                        spaceBetween: 40
+                      }
+                    }}
+                  spaceBetween={50}
+                  slidesPerView={3}
+                  navigation
+                  pagination={{ clickable: true }}
+                  scrollbar={{ draggable: true }}
+                >
+                  {
+                    isLoading ? <span>Loading........</span> :
+                    modul.map((item) => {
+                      return (
+                        <SwiperSlide key={item.id}>
+                          <CardModul title={item.title} image={item.image} descript={item.descript} category={item.category} id={item.id}/>
+                        </SwiperSlide>
+                      )
+                    })
+                  }
+                </Swiper>
+              </div>
+            </div>
           </div>
         </section>
       </main>

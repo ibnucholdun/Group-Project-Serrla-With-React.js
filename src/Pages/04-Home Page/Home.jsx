@@ -11,17 +11,22 @@ import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { useDispatch, useSelector } from 'react-redux'
 import { getModul } from '../../Redux/Actions/modulActions'
 import CardModul from '../../Components/Card Modul/CardModul'
+import { getInstructur } from '../../Redux/Actions/instructurActions'
+import CardInstructur from '../../Components/Card Instructur/CardInstructur'
 import 'swiper/css/navigation';
 import 'swiper/css';
 import './Home.css'
+import Footer from '../../Components/Footer/Footer'
 
 const Home = () => {
   SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
   const dispatch = useDispatch()
   const {modul, isLoading} = useSelector(state => state.modul)
+  const {instructur} = useSelector(state => state.instructur)
 
   useEffect(() => {
     dispatch(getModul())
+    dispatch(getInstructur())
   }, [])
 
   return (
@@ -99,7 +104,53 @@ const Home = () => {
             </div>
           </div>
         </section>
+
+        <section className="instructur-section">
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-12">
+                        <h2 className="instructur-text pw-semibold h2 text-center">Pemateri</h2>
+                    </div>
+                </div>
+                <div className="row mx-auto">
+                    <div className="swiper">
+                    <Swiper
+                        breakpoints={{
+                            320: {
+                              slidesPerView: 1,
+                            },
+                            480: {
+                              slidesPerView: 2,
+                              spaceBetween: 30
+                            },
+                            769: {
+                              slidesPerView: 3,
+                              spaceBetween: 40
+                            }
+                        }}
+                        spaceBetween={50}
+                        slidesPerView={3}
+                        navigation
+                        pagination={{ clickable: true }}
+                        scrollbar={{ draggable: true }}
+                      >
+                      {
+                        isLoading ? <span>Loading........</span> :
+                        instructur.map((item) => {
+                          return (
+                            <SwiperSlide key={item.id}>
+                              <CardInstructur name={item.name} image={item.image} descript={item.descript}/>
+                            </SwiperSlide>
+                          )
+                        })
+                      }
+                      </Swiper>
+                    </div>
+                </div>
+            </div>
+        </section>
       </main>
+      <Footer />
     </div>
   )
 }

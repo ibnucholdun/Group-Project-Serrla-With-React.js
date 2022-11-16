@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import CardModul from '../../Components/Card Modul/CardModul'
 import Footer from '../../Components/Footer/Footer'
 import Navbar from '../../Components/Navbar/Navbar'
-import { getModul } from '../../Redux/Actions/modulActions'
+import { getModul, getSearchedModul } from '../../Redux/Actions/modulActions'
 import './Modul.css'
 
 const Modul = () => {
@@ -13,6 +13,11 @@ const Modul = () => {
   useEffect(() => {
     dispatch(getModul())
   }, [])
+
+  const handleSearch = (e) => {
+    dispatch(getSearchedModul(e.target.value))
+  }
+
   return (
     <div>
       <Navbar nav1={'Home'} route1={'/home'} nav2={'Modul'} route2={'/modul'} nav4={'Logout'} route4={'/'}/>
@@ -20,7 +25,7 @@ const Modul = () => {
         <section className="search-section">
           <h1 className="text-center fw-semibold">Modul Yang Tersedia</h1>
           <p className="text-center">Gali pengetahuan seni dengan mengikuti modul yang tersedia sesuai dengan minat dan bakatmu!</p>
-          <input type="text" className="form-control input-search w-50 d-block mx-auto" placeholder="Cari Modul" aria-label="CAri Modul" aria-describedby="button-addon2" name="search"/>
+          <input type="text" className="form-control input-search w-50 d-block mx-auto" placeholder="Cari Modul" aria-label="Cari Modul" aria-describedby="button-addon2" name="search" onChange={handleSearch}/>
         </section>
         <section className="m-5">
             <div className="container">
@@ -53,14 +58,15 @@ const Modul = () => {
                     <section className="col-lg-9 list-class-container mt-3">
                         <div className="row list-modul g-3">
                           {
+                            
                             isLoading ? <span>Loading........</span> :
-                            modul.map((item) => {
+                            modul.length > 0 ? modul.map((item) => {
                               return (
                                 <div key={item.id} className="col">
                                   <CardModul title={item.title} image={item.image} descript={item.descript} category={item.category} id={item.id} style={{width: '15rem', fontWeight: '400'}}/>
                                 </div>
                               )
-                            })
+                            }) : <p class="text-center fs-4">Modul Tidak Ditemukan</p>
                           }
                         </div>
                     </section>

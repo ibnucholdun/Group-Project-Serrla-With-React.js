@@ -5,6 +5,7 @@ import InputText from '../../Components/InputText/InputText'
 import Swal from 'sweetalert2'
 import { useDispatch } from 'react-redux'
 import { signUp } from '../../Redux/Actions/userActions'
+import { Link } from 'react-router-dom'
 import './SignUp.css'
 
 const SignUp = () => {
@@ -47,7 +48,7 @@ const SignUp = () => {
   return (
     <>
       <section className='section-container'>
-        <div className="container-signup">
+        <div className="container container-signup">
           <div className="row border shadow">
             <div className="col-md-6 left">
               <h2 className="text-center pw-semibold mt-4" style={{fontSize: "36px", color: "#E9D0BA"}}>Halo... Sobat Seni</h2>
@@ -63,7 +64,7 @@ const SignUp = () => {
                 <InputText valueLabel="Katasandi" valueFor="password" type="password" id="password" name="password" placeholder="Masukkan Katasandi" minLength={8} value={password} onChange={(e) => setPassword(e.target.value)}/>
                 <InputText valueLabel="Konfirmasi Katasandi" valueFor="password2" type="password" id="password2" name="password2" placeholder="Konfirmasi Katasandi" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
                 <button type="submit" className="btn btn-primary btn-sign-up">Sign Up</button>
-                <p className="text-center mt-2">Sudah punya akun? <a href="../Sign-In/signin.html">Sign In</a></p>
+                <p className="text-center mt-2">Sudah punya akun? <Link to="/sign-in">Sign In</Link></p>
               </form>
             </div>
           </div>

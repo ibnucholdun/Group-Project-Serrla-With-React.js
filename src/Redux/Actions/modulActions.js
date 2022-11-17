@@ -4,6 +4,7 @@ export const GET_MODUL = 'GET_MODUL';
 export const FETCH_START = 'FETCH_START';
 export const GET_MODUL_SUCCESS = 'GET_MODUL_SUCCESS';
 export const SEARCH_MODUL = 'SEARCH_MODUL';
+export const FILTER_MODUL = 'FILTER_MODUL';
 
 const fetchStart = () => {
     return {
@@ -39,3 +40,17 @@ export const getSearchedModul = (search) => {
         dispatch(searchModul(searchModulData.data));
     }
 };
+
+export const filterModul = (filter) => {
+    return {
+        type: FILTER_MODUL,
+        filter,
+    };
+}
+
+export const getFilteredModul = (filter) => {
+    return async (dispatch) => {
+        const filterModulData = await axios.get(`https://634e1a17b8ce95a1dd7e9aa0.mockapi.io/moduls?category=${filter}`);
+        dispatch(filterModul(filterModulData.data));
+    }
+}

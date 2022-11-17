@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import CardModul from '../../Components/Card Modul/CardModul'
 import Footer from '../../Components/Footer/Footer'
 import Navbar from '../../Components/Navbar/Navbar'
-import { getModul, getSearchedModul } from '../../Redux/Actions/modulActions'
+import { getModul, getSearchedModul, getFilteredModul } from '../../Redux/Actions/modulActions'
+import InputCheckbox from '../../Components/InputCheckbox/InputCheckbox'
 import './Modul.css'
 
 const Modul = () => {
@@ -33,26 +34,16 @@ const Modul = () => {
                     <aside className="col-lg-3 filter-side">
                         <div className="filter">
                             <h3 className="fw-semibold">Filter Modul</h3>
-                            <div className="filter-item">
-                                <h5 className="fw-normal">Kategori</h5>
-                                <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" value="Seni Rupa" id="seni-rupa"/>
-                                    <label className="form-check-label" htmlFor="seni-rupa"> Seni Rupa </label>
-                                </div>
-                                <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" value="Seni Musik" id="seni-musik"/>
-                                    <label className="form-check-label" htmlFor="seni-musik"> Seni Musik </label>
-                                </div>
-                                <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" value="Seni Tari" id="seni-tari"/>
-                                    <label className="form-check-label" htmlFor="seni-tari"> Seni Tari </label>
-                                </div>
-                                <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" value="Seni Teater" id="seni-teater"/>
-                                    <label className="form-check-label" htmlFor="seni-teater"> Seni Teater </label>
-                                </div>
-                            </div>
-                            <button className="btn btn-filter mt-3">Filter</button>
+                            <form>
+                              <div className="filter-item">
+                                  <h5 className="fw-normal">Kategori</h5>
+                                  <InputCheckbox name={'Seni Rupa'} value={'Seni Rupa'} id={'Seni Rupa'} htmlFor={'Seni Rupa'} />
+                                  <InputCheckbox name={'Seni Musik'} value={'Seni Musik'} id={'Seni Musik'} htmlFor={'Seni Musik'}/>
+                                  <InputCheckbox name={'Seni Tari'} value={'Seni Tari'} id={'Seni Tari'} htmlFor={'Seni Tari'}/>
+                                  <InputCheckbox name={'Seni Teater'} value={'Seni Teater'} id={'Seni Teater'} htmlFor={'Seni Teater'}/>
+                              </div>
+                              <button className="btn btn-filter mt-3">Filter</button>
+                            </form>
                         </div>
                     </aside>
                     <section className="col-lg-9 list-class-container mt-3">
@@ -66,7 +57,7 @@ const Modul = () => {
                                   <CardModul title={item.title} image={item.image} descript={item.descript} category={item.category} id={item.id} style={{width: '15rem', fontWeight: '400'}}/>
                                 </div>
                               )
-                            }) : <p class="text-center fs-4">Modul Tidak Ditemukan</p>
+                            }) : <p className="text-center fs-4">Modul Tidak Ditemukan</p>
                           }
                         </div>
                     </section>

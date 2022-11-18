@@ -26,10 +26,18 @@ export const getModul = () => {
     }
 }
 
+const getDetailModulSuccess = (detailModul) => {
+    return {
+        type: GET_DETAIL_MODUL,
+        detailModul,
+    };
+};
+
+
 export const getDetailModul = (id) => {
     return async (dispatch) => {
         dispatch(fetchStart());
         const modul = await axios.get(`https://634e1a17b8ce95a1dd7e9aa0.mockapi.io/moduls/${id}/content/${id}`);
-        dispatch(getModulSuccess(modul.data));
+        dispatch(getDetailModulSuccess(modul.data));
     }
 }

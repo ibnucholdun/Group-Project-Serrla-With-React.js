@@ -21,7 +21,7 @@ const modulReducer = (state = initialState, action) => {
         case GET_DETAIL_MODUL:
             return {
                 ...state,
-                modul: action.modul,
+                modul: action.detailModul,
                 isLoading: false
             }
         default:

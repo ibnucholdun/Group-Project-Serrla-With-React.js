@@ -1,4 +1,4 @@
-import { FETCH_START, GET_MODUL_SUCCESS } from "../Actions/modulActions";
+import { FETCH_START, GET_MODUL_SUCCESS,  GET_DETAIL_MODUL } from "../Actions/modulActions";
 
 const initialState = {
     modul: [],
@@ -13,6 +13,12 @@ const modulReducer = (state = initialState, action) => {
                 isLoading: true
             }
         case GET_MODUL_SUCCESS:
+            return {
+                ...state,
+                modul: action.modul,
+                isLoading: false
+            }
+        case GET_DETAIL_MODUL:
             return {
                 ...state,
                 modul: action.modul,

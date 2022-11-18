@@ -1,4 +1,4 @@
-import { FETCH_START, GET_MODUL_SUCCESS } from "../Actions/modulActions";
+import { FETCH_START, GET_MODUL_SUCCESS, SEARCH_MODUL, FILTER_MODUL } from "../Actions/modulActions";
 
 const initialState = {
     modul: [],
@@ -17,6 +17,16 @@ const modulReducer = (state = initialState, action) => {
                 ...state,
                 modul: action.modul,
                 isLoading: false
+            }
+        case SEARCH_MODUL:
+            return {
+                ...state,
+                modul: action.search
+            }
+        case FILTER_MODUL:
+            return {
+                ...state,
+                modul: action.filter
             }
         default:
             return state;

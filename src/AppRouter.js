@@ -1,29 +1,41 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import LandingPage from './Pages/01-Landing Page/LandingPage.jsx'
-import SignUp from './Pages/02-Sign Up/SignUp.jsx'
-import SignIn from './Pages/03-Sign In/SignIn.jsx'
-import Home from './Pages/04-Home Page/Home.jsx'
-import Modul from './Pages/05-Modul Page/Modul.jsx'
-import DetailModul from './Pages/06-Detail Modul Page/DetailModul.jsx'
-import About from './Pages/07-About Page/About.jsx'
-import ContactUs from './Pages/08-Contact Us Page/ContactUs.jsx'
+// Node Module
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+
+// Pages
+import {
+  LandingPage,
+  About,
+  ContactUs,
+  DetailModul,
+  Home,
+  Modul,
+  SignIn,
+  SignUp,
+} from "./Pages";
+
+// Layout
+import { AppLayout, MainLayout } from "./layout";
 
 const AppRouter = () => {
   return (
     <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/sign-in" element={<SignIn />} />
+      <Route path="/sign-up" element={<SignUp />} />
+      <Route path="/sign-in" element={<SignIn />} />
+      <Route path="/" element={<MainLayout />}>
+        <Route path="" element={<LandingPage />} />
+        <Route path="about" element={<About />} />
+        <Route path="contact" element={<ContactUs />} />
+      </Route>
+      <Route path="/" element={<AppLayout />}>
         <Route path="/home" element={<Home />} />
-        <Route path="/modul">
-            <Route path="" element={<Modul />} />
-            <Route path="detail-modul/:id" element={<DetailModul />} />
+        <Route path="modul">
+          <Route path="" element={<Modul />} />
+          <Route path="detail-modul/:id" element={<DetailModul />} />
         </Route>
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<ContactUs />} />
+      </Route>
     </Routes>
-  )
-}
+  );
+};
 
-export default AppRouter
+export default AppRouter;

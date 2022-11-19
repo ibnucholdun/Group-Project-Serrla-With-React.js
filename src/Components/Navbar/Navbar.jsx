@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Logo from '../../Assets/images/icon-serrla.png'
 import './Navbar.css'
 
-const Navbar = ({nav1, nav2, nav3, nav4, route1, route2, route3, route4, route5}) => {
+const Navbar = ({nav1, nav2, nav3, nav4, route1, route2, route3, route4, route5 = "/"}) => {
   return (
     <header className="sticky-top">
         <nav className="navbar navbar-expand-lg p-2">

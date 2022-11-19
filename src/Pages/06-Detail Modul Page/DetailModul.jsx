@@ -1,23 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react'
 import ReactDOMServer from 'react-dom/server'
-import Navbar from '../../Components/Navbar/Navbar'
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
 import ListAside from '../../Components/List Aside/ListAside'
 import { getDetailModul } from '../../Redux/Actions/modulActions'
-import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import Footer from '../../Components/Footer/Footer'
 import TemplateDetailContent from '../../Components/TemplateDetailContent/TemplateDetailContent'
 import TemplateDetailContentWithVideo from '../../Components/TemplateDetailContent/TemplateDetailContentWithVideo'
 import './DetailModul.css'
 
 const DetailModul = () => {
   const dispatch = useDispatch()
-  const {id} = useParams()
-  const {contents} = useSelector(state => state.modul.modul)
+  const { id } = useParams()
+  const { contents } = useSelector(state => state.modul.modul)
   const response = useRef(null)
   const [loading, setLoading] = useState(false)
   
-  useEffect((e) => {
+  useEffect(() => {
     dispatch(getDetailModul(id))
     setLoading(true)
   }, [])
@@ -38,7 +37,6 @@ const DetailModul = () => {
 
   return (
     <div>
-      <Navbar nav1={'Home'} route1={'/home'} nav2={'Modul'} route2={'/modul'} nav4={'Logout'} route4={'/'}/>
       <section className="detail-modul">
             <div className="container-fluid">
                 <div className="row">
@@ -73,7 +71,6 @@ const DetailModul = () => {
                 </div>
             </div>
         </section>
-        <Footer />
     </div>
   )
 }

@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react'
-import Footer from '../../Components/Footer/Footer'
-import Navbar from '../../Components/Navbar/Navbar'
 import Gambar1 from '../../Assets/images/gambar1.png'
 import Gambar2 from '../../Assets/images/gambar2.png'
 import VectorOval from '../../Assets/images/vector-oval.png'
@@ -26,11 +24,10 @@ const LandingPage = () => {
   useEffect(() => {
     dispatch(getModul())
     dispatch(getInstructur())
-  }, [])
+  }, [dispatch])
 
   return (
     <div>
-      <Navbar nav1={'About'} route1={'/about'} nav2={'Contact Us'} route2={'/contact'} nav3={'Sign In'} route3={'/sign-in'} nav4={'Sign Up'} route4={'/sign-up'} route5={'/'}/>
       <main>
         <section className="hero-section d-flex align-items-center">
           <img src={VectorOval} alt="" className="vector1"/>
@@ -157,7 +154,6 @@ const LandingPage = () => {
             </div>
         </section>
       </main>
-      <Footer />
     </div>
   )
 }

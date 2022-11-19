@@ -23,6 +23,7 @@ const modulReducer = (state = initialState, action) => {
                 ...state,
                 modul: action.detailModul,
                 isLoading: false
+            }
         case SEARCH_MODUL:
             return {
                 ...state,

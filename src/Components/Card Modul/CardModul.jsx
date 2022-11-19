@@ -13,7 +13,7 @@ const CardModul = ({title, image, descript, category, id, style}) => {
                     <h5 className="card-title" style={style}>{title}</h5>
                     <p className="text-end fw-light">Kategori: {category}</p>
                     <p className="card-text pw-normal">{descript}</p>
-                    <Link to={`/home/detail-modul/${id}`} className="btn btn-primary btn-card">Selengkapnya</Link>
+                    <Link to={`/modul/detail-modul/${id}`} className="btn btn-primary btn-card">Selengkapnya</Link>
                 </div>
             </div>
         </div>

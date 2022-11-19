@@ -53,6 +53,8 @@ export const getFilteredModul = (filter) => {
     return async (dispatch) => {
         const filterModulData = await axios.get(`https://634e1a17b8ce95a1dd7e9aa0.mockapi.io/moduls?category=${filter}`);
         dispatch(filterModul(filterModulData.data));
+    }
+}
 
 const getDetailModulSuccess = (detailModul) => {
     return {

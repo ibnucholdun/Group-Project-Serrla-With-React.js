@@ -1,19 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import CardModul from '../../Components/Card Modul/CardModul'
-import Footer from '../../Components/Footer/Footer'
-import Navbar from '../../Components/Navbar/Navbar'
-import { getModul, getSearchedModul, getFilteredModul } from '../../Redux/Actions/modulActions'
-import InputCheckbox from '../../Components/InputCheckbox/InputCheckbox'
+import { getFilteredModul, getSearchedModul } from '../../Redux/Actions/modulActions'
 import './Modul.css'
+import InputRadioBtn from 'Components/InputRadioBtn/InputRadioBtn'
+import useQuery from 'hooks/useQuery'
+import { useNavigate } from 'react-router-dom'
 
 const Modul = () => {
-  const dispatch = useDispatch()
+  const query = useQuery();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [filter, setFilter] = useState('');
   const {modul, isLoading} = useSelector(state => state.modul)
 
+  const submit = (e) => {
+    e.preventDefault()
+    navigate(`?q=${filter}`)
+  }
+
+  const onChangeFilter = (e) => {
+    const value = e.target.value;
+    setFilter(value)
+  }
+
   useEffect(() => {
-    dispatch(getModul())
-  }, [])
+    dispatch(getFilteredModul(query.get('q')))
+  }, [query])
 
   const handleSearch = (e) => {
     dispatch(getSearchedModul(e.target.value))
@@ -21,7 +34,6 @@ const Modul = () => {
 
   return (
     <div>
-      <Navbar nav1={'Home'} route1={'/home'} nav2={'Modul'} route2={'/modul'} nav4={'Logout'} route4={'/'}/>
       <main>
         <section className="search-section">
           <h1 className="text-center fw-semibold">Modul Yang Tersedia</h1>
@@ -34,13 +46,14 @@ const Modul = () => {
                     <aside className="col-lg-3 filter-side">
                         <div className="filter">
                             <h3 className="fw-semibold">Filter Modul</h3>
-                            <form>
+                            <form onSubmit={submit}>
                               <div className="filter-item">
                                   <h5 className="fw-normal">Kategori</h5>
-                                  <InputCheckbox name={'Seni Rupa'} value={'Seni Rupa'} id={'Seni Rupa'} htmlFor={'Seni Rupa'} />
-                                  <InputCheckbox name={'Seni Musik'} value={'Seni Musik'} id={'Seni Musik'} htmlFor={'Seni Musik'}/>
-                                  <InputCheckbox name={'Seni Tari'} value={'Seni Tari'} id={'Seni Tari'} htmlFor={'Seni Tari'}/>
-                                  <InputCheckbox name={'Seni Teater'} value={'Seni Teater'} id={'Seni Teater'} htmlFor={'Seni Teater'}/>
+                                  <InputRadioBtn name={'filter'} checked={filter === ''} onChange={onChangeFilter} label="None" value={''} id={'Seni_Rupa'} htmlFor={'Seni_Rupa'} />
+                                  <InputRadioBtn name={'filter'} checked={filter === 'Seni Rupa'} onChange={onChangeFilter} label="Seni Rupa" value={'Seni Rupa'} id={'Seni_Rupa'} htmlFor={'Seni_Rupa'} />
+                                  <InputRadioBtn name={'filter'} checked={filter === 'Seni Musik'} onChange={onChangeFilter} label="Seni Musik" value={'Seni Musik'} id={'Seni_Musik'} htmlFor={'Seni_Musik'} />
+                                  <InputRadioBtn name={'filter'} checked={filter === 'Seni Tari'} onChange={onChangeFilter} label="Seni Tari" value={'Seni Tari'} id={'Seni_Tari'} htmlFor={'Seni_Tari'} />
+                                  <InputRadioBtn name={'filter'} checked={filter === 'Seni Teater'} onChange={onChangeFilter} label="Seni Teater"  value={'Seni Teater'} id={'Seni_Teater'} htmlFor={'Seni_Teater'} />
                               </div>
                               <button className="btn btn-filter mt-3">Filter</button>
                             </form>
@@ -64,7 +77,6 @@ const Modul = () => {
                 </div>
             </div>
         </section>
-        <Footer />
       </main>
     </div>
   )
